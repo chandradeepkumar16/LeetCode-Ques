@@ -12,14 +12,16 @@ class Solution{
   public:
   int smallestSumSubarray(vector<int>& a){
       //Code here
+      int curr=a[0];
+      int minso=a[0];
       int n=a.size();
-      vector<int> dp(a.begin() , a.end());
       
       for(int i=1;i<n;i++){
-          dp[i]=min(dp[i] , a[i]+dp[i-1]);
+          curr=min(a[i] , curr+a[i]);
+          minso=min(minso , curr);
       }
       
-      return *min_element(dp.begin() ,dp.end() );
+      return minso;
       
   }
 };
