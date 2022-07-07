@@ -9,20 +9,20 @@ class Solution{
     int maxSumPairWithDifferenceLessThanK(int arr[], int N, int K)
     {
         // Your code goes here   
-        int sum=0;
-        sort(arr , arr+N);
-        
-        for(int i=N-1;i>=1;){
-            if(arr[i]-arr[i-1] < K){
-                sum+=arr[i]+arr[i-1];
-                i=i-2;
-            }else{
-                i=i-1;
-            }
-        }
-        
-        return sum;
-        
+       int sum=0;
+       sort(arr,arr+N);
+       for(int i=N-1;i>=1;)
+       {
+           if(arr[i]-arr[i-1]<K)
+           {
+               sum=arr[i]+arr[i-1]+sum;
+               i=i-2;
+           }
+           else
+           i=i-1;
+           
+       }
+       return sum;
     }
 };
 
