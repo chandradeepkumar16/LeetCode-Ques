@@ -5,19 +5,41 @@ using namespace std;
  // } Driver Code Ends
 class Solution{
 	public:
-   bool brainGame(vector<int>nums) {
-    	vector<int>a(1005);
-    	for(int i = 2; i<= 1000; i++){
-    		for(int j = 2*i; j <= 1000; j+=i)
-    			a[j] = max(a[j], 1 + a[i]);
-    	}
-    	int x = 0;
-    	for(int i = 0; i < nums.size(); i++){
-    		x = x ^ a[nums[i]];
-    	}
-    	if(x == 0)
-    		return false;
-    	return true;
+	bool isPrime(int n)
+    {
+        for(int i=2;i<=sqrt(n);i++){
+            if(n%i==0)
+              return false;
+        }
+        return true;
+    }
+    int primeFactors(int n)
+    {
+        int ans = 0;
+        int num =n;
+        for(int i=2; i<=num/2; i++)
+        {
+            while(n%i == 0)
+            {
+                ans++;
+                n/= i;
+            }
+        }
+        return ans;
+    }
+    bool brainGame(vector<int>nums) {
+        int count = 0;
+        for(auto x:nums)
+        {
+            if(!isPrime(x))
+            {
+                count = count ^ (primeFactors(x) - 1);
+            }
+        } 
+        if(count == 0)
+            return false;
+        return true;
+   
     }
 };
 
