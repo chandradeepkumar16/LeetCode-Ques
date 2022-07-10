@@ -97,25 +97,28 @@ struct Node {
 class Solution
 {
     public:
-    
-    void inorder(vector<int>& ans , Node* root){
-        if(root==NULL){
-            return;
-        }
-        // left root right
-        inorder(ans , root->left);
-        ans.push_back(root->data);
-        inorder(ans, root->right);
-    }
-    
     int kthLargest(Node *root, int K)
     {
         //Your code here
-        vector<int> ans;
-        inorder(ans , root);
-        sort(ans.begin() , ans.end());
-        
-        return ans[ans.size()-K];
+        vector<int> v;
+        if(root==NULL)
+            return NULL;
+        queue<Node*> q;
+        q.push(root);
+        while(!q.empty()){
+            int count=q.size();
+            for(int i=0;i<count;i++){
+                Node* curr=q.front();
+                q.pop();
+                v.push_back(curr->data);
+                if(curr->left!=NULL)
+                    q.push(curr->left);
+                if(curr->right!=NULL)
+                    q.push(curr->right);
+            }
+        }
+        sort(v.begin() , v.end());
+        return v[v.size()-K];
     }
 };
 
