@@ -94,23 +94,26 @@ struct Node {
 class Solution {
   public:
     // Return the Kth smallest element in the given BST
-    void inorder(Node* root , vector<int> &v){
-        if(root==NULL) return;
-        inorder(root->left,v);
-        v.push_back(root->data);
-        inorder(root->right,v);
-        
-    }
-    int KthSmallestElement(Node *root, int K) {
-        // add code here.
-        vector<int> v;
-        inorder(root , v);
-        sort(v.begin() , v.end());
-        if(K>v.size()){
-            return -1;
-        }
-        return v[K-1];
-    }
+void help(Node *head, int &k,int &r)
+   {
+       if(head==NULL)
+           return;
+       help(head->left,k,r);
+       --k;
+       if(k==0)
+       {
+           r=head->data;
+           return;
+       }
+       help(head->right,k,r);
+   }
+   
+   int KthSmallestElement(Node *root, int K) 
+   {
+       int r=-1;
+       help(root,K,r);
+       return r;
+   }
 };
 
 // { Driver Code Starts.
