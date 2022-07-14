@@ -117,14 +117,19 @@ class Solution {
          int m=r.size()-1;
          
          int c=0;
+         int maxi=0;
          while(n>=0 && m>=0){
              if(l[n]!=r[m]) break;
+             else{
+                 c++;
+                 maxi=max(maxi,c);
+             }
              m--;
              n--;
-             c++;
+            //  c=0;
          }
         
-        return c>1?1:0;
+        return maxi>1?1:0;
 
     }
 };
