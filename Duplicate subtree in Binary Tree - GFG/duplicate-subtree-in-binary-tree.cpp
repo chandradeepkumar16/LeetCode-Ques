@@ -93,43 +93,30 @@ class Solution {
     /*This function returns true if the tree contains 
     a duplicate subtree of size 2 or more else returns false*/
     
-    void inorder(Node* root , vector<int>&v){
-        
-        if(!root){
-            return;
+ unordered_map<string,int>mapi;
+   string solve(Node*root){
+       if(root==NULL)return "&";
+        if(root->left==NULL and root->right==NULL){
+           return to_string(root->data);
+       }
+       string ans="";
+       ans+=to_string(root->data);
+      
+       ans+=solve(root->left);
+       ans+=solve(root->right);
+       mapi[ans]++;
+       return ans;
+   }
+   int dupSub(Node *root) {
+        // code here
+        if(root==NULL)return 0;
+        solve(root);
+        for(auto x:mapi){
+            if(x.second>=2){
+                return 1;
+            }
         }
-        v.push_back(root->data);
-
-        inorder(root->left , v);
-        inorder(root->right , v);
-        
-    }
-    
-    int dupSub(Node *root) {
-         // code here
-         
-         vector<int> l , r;
-         if(!root) return 0;
-         inorder(root->left , l);
-         inorder(root->right , r);
-         
-         int n=l.size()-1;
-         int m=r.size()-1;
-         
-         int c=0;
-         int maxi=0;
-         while(n>=0 && m>=0){
-             if(l[n]!=r[m]) break;
-             else{
-                 c++;
-                 maxi=max(maxi,c);
-             }
-             m--;
-             n--;
-            //  c=0;
-         }
-        
-        return maxi>1?1:0;
+        return 0;
 
     }
 };
