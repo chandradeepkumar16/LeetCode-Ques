@@ -99,7 +99,7 @@ struct Node
 */
 class Solution{
   public:
-  void traverse(Node *root , int k , int &ans , vector<int> v){
+  void traverse(Node *root , int k , int &ans , vector<int> &v){
       
       if(!root) return;
       
