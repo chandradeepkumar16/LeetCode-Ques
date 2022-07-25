@@ -14,12 +14,13 @@ public:
         }
         int ans=0;
         if(nums[n-1]>sum){
-             return dp[n][sum]=solve(nums , n-1 ,sum);
+            return dp[n][sum]=solve(nums , n-1 ,sum);
         }
         else{
-            return dp[n][sum]= solve(nums , n-1 , sum-nums[n-1]) || solve(nums , n-1 , sum);
+            return dp[n][sum] = solve(nums , n-1 , sum-nums[n-1]) || solve(nums , n-1 , sum);
         }
-        
+        // dp[n][sum]=ans;
+        // return dp[n][sum];
       
     }
     
