@@ -1,27 +1,37 @@
 class Solution {
 public:
     
-    int rec(vector<int> &days, vector<int> &costs, int i, vector <bool> map, vector <int>& memo) {
-        if( i > 365)
+    int solve(int n , vector<int>&days , vector<int>&costs ,int index, vector<int>&dp){
+        
+        if(index>=n){
             return 0;
-        if(memo[i] != -1)
-            return memo[i]; 
-        if(!map[i])
-            return memo[i] = rec(days, costs, i+1, map, memo);
-        return memo[i] = min({
-            costs[0] + rec(days, costs, i+1, map, memo),
-            costs[1] + rec(days, costs, i+7, map, memo),
-            costs[2] + rec(days, costs, i+30, map, memo)
-        });
+        }
+        
+        if(dp[index]!=-1){
+            return dp[index];
+        }
+        
+        int option1= costs[0]+ solve(n , days , costs , index+1 , dp);
+        
+        int i;
+        for(i=index; i<n && days[i] < days[index]+7 ;i++);
+        
+        int option2=costs[1]+solve( n , days , costs , i , dp);
+        
+        for(i=index; i<n && days[i] < days[index]+30 ;i++);
+        int option3=costs[2]+solve( n , days , costs , i , dp);
+        
+        dp[index]=min(option1 , min(option2 ,option3));
+        return dp[index];
+
     }
     
+    
+    
     int mincostTickets(vector<int>& days, vector<int>& costs) {
-        vector <bool> map(366, false);
-        vector <int> memo(366, -1);
-        for(auto x: days)
-            map[x] = true;
-        int x = rec(days, costs, 0, map, memo);
-        return x;
+        int n=days.size();
+        vector<int> dp(n+1 ,-1);
+        return solve(n,days , costs ,0, dp);
         
     }
 };
