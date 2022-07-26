@@ -24,7 +24,7 @@ public:
         
         sort(sat.begin() , sat.end());
         
-        vector<vector<int>> dp(sat.size() , vector<int>(sat.size() ,-1));
+        vector<vector<int>> dp(sat.size()+1 , vector<int>(sat.size()+1 ,-1));
         
         return solve(sat , 0 , 0,dp);
     }
