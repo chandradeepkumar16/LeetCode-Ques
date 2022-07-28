@@ -1,6 +1,5 @@
 class Solution {
 public:
-    // int dp[101];
      int decode(string& s, int idx, int n , vector<int>&dp)
     {
         if(idx < n && s[idx] == '0') return 0;
@@ -25,7 +24,6 @@ public:
        
         int n = s.size();
         vector<int> dp(101,-1);
-        // memset(dp,-1,sizeof dp);
         return decode(s, 0, n , dp);
     }
 };
