@@ -1,8 +1,8 @@
 class Solution {
 public:
     
-    bool check(vector<int> base , vector<int> newbox){
-        if(newbox[0]<=base[0] && newbox[1]<=base[1] && newbox[2]<=base[2]){
+    bool check(vector<int> newbox , vector<int> base){
+        if(newbox[0]>=base[0] && newbox[1]>=base[1] && newbox[2]>=base[2]){
             return true;
         }else{
             return false;
