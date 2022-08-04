@@ -1,27 +1,52 @@
 class Solution {
 public:
-    int minSwap(vector<int>& a, vector<int>& b) {
-        int n=a.size();
+    
+    int solve(vector<int>& nums1, vector<int>& nums2 , int index , bool swapped , 
+              vector<vector<int>> &dp){
         
-        vector<int> x(n,0);
-        vector<int> y(n,1);
+        if(index==nums1.size()) return 0;
         
-        for(int i=1;i<n;i++){
-            x[i]=y[i]=n;
-            
-            if( (a[i-1] <a[i]) && (b[i-1]<b[i]) ){
-                x[i]=x[i-1];
-                y[i]=(y[i-1]+1);
-            }
-            
-            if( (a[i-1] < b[i])  && (b[i-1]<a[i]) ){
-                x[i]=min(x[i] , y[i-1]);
-                y[i]=min(y[i] , x[i-1]+1);
-            }
+        int ans=INT_MAX;
+        
+        if(dp[index][swapped]!=-1){
+            return dp[index][swapped];
         }
         
-        return min(y[n-1] ,x[n-1]);
+                
+        int prev1=nums1[index-1];
+        int prev2=nums2[index-1];
         
+        
+        if(swapped){
+            swap(prev1 , prev2);
+        }
+        if(nums1[index]>prev1 && nums2[index]>prev2){
+            ans= solve(nums1 , nums2 , index+1 , 0 ,dp);
+        }
+        
+        if(nums1[index]>prev2 && nums2[index]>prev1){
+            ans=min(ans , 1+solve(nums1 , nums2 , index+1 , 1,dp));
+        }
+        
+        dp[index][swapped]= ans;
+        return dp[index][swapped];
+        
+        
+    }
+    
+    
+    int minSwap(vector<int>& nums1, vector<int>& nums2) {
+        
+        bool swapped=0;
+        
+        nums1.insert(nums1.begin() , -1);
+        nums2.insert(nums2.begin() , -1);
+        
+        int n =nums1.size();
+        
+        vector<vector<int>> dp(n , vector<int>(2,-1));
+        
+        return solve(nums1 , nums2 , 1 , swapped ,dp);
         
     }
 };
