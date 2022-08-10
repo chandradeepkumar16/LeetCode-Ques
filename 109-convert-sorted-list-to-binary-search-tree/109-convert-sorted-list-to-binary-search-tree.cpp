@@ -21,37 +21,23 @@
  */
 class Solution {
 public:
-    
-    
-    TreeNode* solve(vector<int>&nums , int start , int end){
-        
-        if(start>end){
-            return NULL;
-        }
-        
-        int mid=(start+end)/2;
-        TreeNode* node = new TreeNode(nums[mid]);
-        node->left = solve(nums , start , mid-1);
-        node->right = solve(nums , mid+1 , end);
-        
-        return node;
-            
-        
-    }
+
     
     TreeNode* sortedListToBST(ListNode* head) {
         
-        ListNode* dummy = head;
-        vector<int> v;
-        
-        while(dummy!=NULL){
-            v.push_back(dummy->val);
-            dummy = dummy->next;
+        if( head == NULL ) return NULL;
+        if (head->next == NULL ) return new TreeNode(head->val);
+        ListNode *slow = head, *prev = NULL, *fast = head;
+        while (fast != NULL && fast->next != NULL ) {
+            prev = slow;
+            slow = slow->next;
+            fast = fast->next->next;
         }
-        
-        // sort(v.begin() , v.end());
-        
-        return solve( v , 0 , v.size()-1);
+        prev->next = NULL; 
+        TreeNode* root = new TreeNode(slow->val);
+        root->left = sortedListToBST(head);
+        root->right = sortedListToBST(slow->next);
+        return root;
         
     }
 };
