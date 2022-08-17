@@ -2,7 +2,9 @@ class Solution {
 public:
      int decode(string& s, int idx, int n , vector<int>&dp)
     {
+         
         if(idx < n && s[idx] == '0') return 0;
+         
         if(idx >= n)
             return 1;
         
