@@ -16,13 +16,13 @@ public:
             
         }
         
-        set<string> st;
-        for(auto &i:ans){
-            st.insert(i);
+        unordered_map<string , int> um;
+        
+        for(int i=0;i<ans.size();i++){
+            um[ans[i]]++;
         }
         
-        return st.size();
-        
+        return um.size();
         
     }
 };
