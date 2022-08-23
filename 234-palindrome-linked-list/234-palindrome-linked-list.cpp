@@ -10,22 +10,62 @@
  */
 class Solution {
 public:
-    bool isPalindrome(ListNode* head) {
-        vector<int> ans;
+    
+    ListNode* getmid(ListNode* head){
         
-        while(head!=NULL){
-            ans.push_back(head->val);
-            head=head->next;
+        
+        ListNode* fast=head->next;
+        ListNode* slow=head;
+        
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
         }
-        int j=ans.size()-1;
-        for(int i=0;i<ans.size()/2;i++){
-            if(ans[i]!=ans[j]){
+        return slow;
+    }
+    
+    
+    ListNode* rev(ListNode* head){
+        
+        ListNode* curr=head;
+        ListNode* prev=NULL;
+        ListNode* next=NULL;
+        
+        
+        while(curr!=NULL){
+            
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+            
+        return prev;
+
+    }
+    
+    
+    bool isPalindrome(ListNode* head) {
+        
+        ListNode* middle=getmid(head);
+        
+        ListNode* temp=middle->next;
+        middle->next = rev(temp);
+        
+        ListNode* h1=head;
+        ListNode* h2=middle->next;
+        
+        while(h2!=NULL){
+            if(h1->val !=h2->val){
                 return false;
-            }else{
-                j--;
             }
+            h1=h1->next;
+            h2=h2->next;
+            
         }
         return true;
+        
+        
         
     }
 };
