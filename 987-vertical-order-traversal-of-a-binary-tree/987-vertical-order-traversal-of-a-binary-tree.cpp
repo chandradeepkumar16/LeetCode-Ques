@@ -13,6 +13,7 @@ class Solution {
 public:
      map<int, map<int, multiset<int>>> mp;
     vector<vector<int>> verticalTraversal(TreeNode* root) {
+        mp.clear();
         cal(root, 0, 0);
         vector<vector<int> > ans;
         for(auto m : mp) {
