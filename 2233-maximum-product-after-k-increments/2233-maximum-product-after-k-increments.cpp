@@ -2,51 +2,27 @@ class Solution {
 public:
     int maximumProduct(vector<int>& nums, int k) {
         
-        int n = nums.size();
+        priority_queue<int, vector<int> ,greater<int>> pq;
+        long long int mod=1000000007,ans=1;
         
-        long long mod = 1e9 + 7;
-        
-        // declare a min heap
-        
-        priority_queue<int, vector<int>, greater<int>> pq;
-        
-        // push all the elements into pq
-        
-        for(int i = 0; i < n; i++)
-        {
+        for(int i=0;i<nums.size();i++){
             pq.push(nums[i]);
         }
         
-        // increment the min. element by 1, perform this operation k times
-        
-        while(!pq.empty() && k)
-        {
-            // take out the minimum val
+        while(k--){
             
-            int val = pq.top();
-            
+            int ch=pq.top();
             pq.pop();
-            
-            // increment the val by 1
-            
-            val++;
-            
-            pq.push(val);
-            
-            k--;
+            ch=ch+1;
+            pq.push(ch);
         }
         
-        // find the product of the all the elements
-        
-        int prod = 1;
-        
-        while(!pq.empty())
-        {
-            prod = (prod % mod * pq.top() % mod) % mod;
-            
+       
+        while(!pq.empty()){
+            ans=(ans*pq.top())%mod;
             pq.pop();
         }
+        return ans%mod;
         
-        return prod;
     }
 };
