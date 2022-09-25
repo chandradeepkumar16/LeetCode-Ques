@@ -4,14 +4,9 @@ public:
     int start = 0, len = 0;
 public:
      MyCircularQueue(int k) {
-        // val = new int[k];
-        // currentIndex = -1;
-        // nextIndex = 0;
-        // capacity = k;
-        // size = 0;
+
          v.resize(k);
     }
-    // MyCircularQueue(int k): v(k) {}
     bool enQueue(int value) {
         if (isFull()) return false;
         v[(start + len++) % v.size()] = value;
