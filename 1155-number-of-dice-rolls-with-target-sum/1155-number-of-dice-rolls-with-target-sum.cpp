@@ -1,12 +1,12 @@
-#define mod 1000000007
 class Solution {
 public:
-    
-    int solvemem(int n , int k , int target , vector<vector<int>>&dp){
+    int mod=1e9+7;
+    int solve(int n , int k , int target , vector<vector<int>>&dp){
         
         if(target<0){
             return 0;
         }
+        
         if(target==0 && n==0){
             return 1;
         }
@@ -17,23 +17,24 @@ public:
         if(dp[n][target]!=-1){
             return dp[n][target]%mod;
         }
-        
         int ans=0;
         for(int i=1;i<=k;i++){
-            ans+=solvemem(n-1 , k , target-i , dp);
-            ans%=mod;
-        
+            ans+=solve(n-1 , k , target-i , dp);
+            ans=ans%mod;
         }
         
         return dp[n][target]=ans;
         
+        
     }
+    
     
     
     int numRollsToTarget(int n, int k, int target) {
         
-        vector<vector<int>> dp(n+1 , vector<int>(target+1 ,-1));        
-        return solvemem(n , k , target , dp);
+        vector<vector<int>> dp(n+1 , vector<int>(target+1,-1));
+        
+        return solve(n , k , target , dp);
         
     }
 };
