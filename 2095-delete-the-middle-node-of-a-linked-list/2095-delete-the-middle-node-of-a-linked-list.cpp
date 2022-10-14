@@ -21,10 +21,7 @@ public:
         }
         
         if(cnt==1) return NULL;
-
-        
         cnt=cnt/2;
-        
         
         for(int i=0;i<cnt-1;i++){
             head=head->next;
@@ -34,6 +31,7 @@ public:
         head->next=head->next->next;
           
         return dummy;
+        //
         
     }
 };
