@@ -9,6 +9,6 @@ public:
             mods[pretemp] ++;
             pretemp = sum;
         }
-        return false;
+        return 0;
     }
 };
