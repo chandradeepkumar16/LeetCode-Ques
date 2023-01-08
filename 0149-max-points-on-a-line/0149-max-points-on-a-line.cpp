@@ -2,12 +2,13 @@ class Solution {
 public:
     int maxPoints(vector<vector<int>>& points) {
                 int count=0;
+        int up=INT_MAX;
         for(int i=0;i<points.size();i++){
             unordered_map<float,int> um;
             for(int j=0;j<points.size();j++){
                 if(i!=j){
                     if(points[i][0]-points[j][0]==0){
-                        um[INT_MAX]++;
+                        um[up]++;
                     }
                     else{
                         float a=points[i][1]-points[j][1];
