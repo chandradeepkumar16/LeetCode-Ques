@@ -11,7 +11,7 @@ public:
         }
         
         if((hasApple[node] || count!=0 )&& node!=0){
-            count+=2;
+            count++;
         }
         return count;
         
@@ -31,7 +31,7 @@ public:
             adj[v].push_back(u);
         }
         
-        return dfs(0 , adj , vis , hasApple);
+        return 2*dfs(0 , adj , vis , hasApple);
         
     }
 };
